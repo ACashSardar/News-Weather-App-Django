@@ -1,0 +1,85 @@
+{% include 'header.html' %}
+    <title>WeatherPage</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">News And Weather App</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'General' %}">General</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'Business' %}">Business</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'Entertainment' %}">Entertainment</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'Science' %}">Science</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'Health' %}">Health</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'Sports' %}">Sports</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'Technology' %}">Technology</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/Weather/"><i class="fa fa-cloud" aria-hidden="true"></i> Weather Forecast</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/Livenews/"><i class="fa fa-fire" aria-hidden="true"></i> Live News</a>
+              </li>
+            </ul>
+
+            <form class="d-flex" action="/Weather/" method="POST">
+              {% csrf_token %}
+              <input class="form-control me-2" type="search" name="cityname" placeholder="Enter a City name" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid" style="overflow: hidden;">
+        <div class="row p-2">
+
+            {% if city %}
+            <div class="container-fluid">
+                <h4><i class="fa fa-map-marker" aria-hidden="true"></i> {{city.capitalize}},{{state_country.title}}</h4>
+            </div>
+            {% endif %}
+
+            {% for current_day,icon,sky_condition,day_temp,temp_max,temp_min,humidity,wind_speed in weather_data %}
+                <div class="col-xl-3 col-6 p-1">
+                    <div class="card">
+                        <div class="card-body bg-warning">
+                            <h5 class="card-title">{{current_day}}</h5>
+                            <h2 class="card-title">{{day_temp}}°C</h2>
+                        </div>
+                        <div class="card-body">
+                            <img src="http://openweathermap.org/img/w/{{icon}}.png" alt="Poster not available">
+                            <p class="card-text"><strong>{{sky_condition.capitalize}}</strong></p>                            
+                            <p class="card-text"><strong>Max Temp</strong>: {{temp_max}}°C </p>
+                            <p class="card-text"><strong>Min Temp</strong>: {{temp_min}}°C </p>
+                            <p class="card-text"><strong>Humidity</strong>: {{humidity}}% </p>
+                            <p class="card-text"><strong>Wind-speed</strong>: Upto {{wind_speed}} mph  </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+      </div>
+    <br>
+
+  {% if city %}
+    {% include 'footer.html' %}
+  {% endif %}

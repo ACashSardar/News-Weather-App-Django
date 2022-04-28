@@ -1,0 +1,65 @@
+{% include 'header.html' %}
+<title>LiveNews Page</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">News And Weather App</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'General' %}">General</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'Business' %}">Business</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'Entertainment' %}">Entertainment</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'Science' %}">Science</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'Health' %}">Health</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'Sports' %}">Sports</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'Technology' %}">Technology</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/Weather/"><i class="fa fa-cloud" aria-hidden="true"></i> Weather Forecast</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/Livenews/"><i class="fa fa-fire" aria-hidden="true"></i> Live News</a>
+              </li>
+            </ul>
+
+            <form class="d-flex" action="/Livenews/" method="POST">
+              {% csrf_token %}
+                <button class="btn btn-outline-warning" type="submit">Refresh</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid">
+        <h4> News Updates From Youtube Live <i class="fa fa-youtube" aria-hidden="true"></i> </h4>
+      </div>
+
+      <div class="container-fluid" style="overflow: hidden;">
+        <div class="row">
+            <div class="custom-grid">
+                {% for ytc in YTchannels %}
+                    <iframe src="{{ytc.url}}"></iframe>
+                {% endfor %}
+            </div>
+        </div>
+      </div>
+      <br>
+{% include 'footer.html' %}

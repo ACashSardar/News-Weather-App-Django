@@ -1,0 +1,103 @@
+{% include 'header.html' %}
+    <title>NewsPage</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">News And Weather App</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'General' %}">General</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'Business' %}">Business</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'Entertainment' %}">Entertainment</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'Science' %}">Science</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'Health' %}">Health</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'Sports' %}">Sports</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'CategoryNews' 'Technology' %}">Technology</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/Weather/"><i class="fa fa-cloud" aria-hidden="true"></i> Weather Forecast</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/Livenews/"><i class="fa fa-fire" aria-hidden="true"></i> Live News</a>
+              </li>
+            </ul>
+
+            <form class="d-flex" action="/" method="POST">
+              {% csrf_token %}
+                <select name="ChannelName" class="form-select mx-1">
+                    <option value="{{ChannelName}}">{{ChannelName}}</option>
+                    <option value="abc-news">ABC News</option>
+                    <option value="al-jazeera-english">AL JAZEERA ENG.</option>
+                    <option value="bbc-news">BBC News</option>
+                    <option value="bbc-sport">BBC Sport</option>
+                    <option value="bloomberg">Bloomberg</option>
+                    <option value="business-insider">Business Insider</option>
+                    <option value="buzzfeed">Buzzfeed</option>
+                    <option value="cbc-news">CBC News</option>
+                    <option value="cnn">CNN</option>
+                    <option value="entertainment-weekly">Entertainment Weekly</option>
+                    <option value="espn">ESPN</option>
+                    <option value="espn-cric-info">ESPN Cric Info</option>
+                    <option value="fortune">Fortune</option>
+                    <option value="fox-news">Fox News</option>
+                    <option value="google-news">Google News</option>
+                    <option value="google-news-in">Google News (India)</option>
+                    <option value="crypto-coins-news">Crypto Coins News</option>
+                    <option value="mtv-news">MTV News</option>
+                    <option value="national-geographic">National Geographic</option>
+                    <option value="news24">News24</option>
+                    <option value="reddit-r-all">Reddit /r/all</option>
+                    <option value="talksport">TalkSport</option>
+                    <option value="the-hindu">The Hindu</option>
+                    <option value="the-lad-bible">The Lad Bible</option>
+                    <option value="the-times-of-india">The Times of India</option>
+                    <option value="the-verge">The Verge</option>
+                    <option value="the-washington-times">The Washington Times</option>
+                    <option value="usa-today">USA Today</option>
+                    <option value="bleacher-report">Bleacher Report</option>
+                </select>
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid" style="overflow: hidden;">
+        <div class="row p-2">
+          {% for dt,n,i,d,sr,li in data %}
+            <div class="col-xl-4 col-12 p-1">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-text">Published on: {{dt}} -by <strong>{{sr}}</strong></p>
+                </div>
+                <img src="{{ i }}" class="card-img-top" alt="Poster not available">
+                <div class="card-body">
+                  <h5 class="card-title">{{n}}</h5>
+                  <p class="card-text">{{d}}</p>
+                  <a href={{li}} class="btn btn-success">Continue Reading..</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <br>
+{% include 'footer.html' %}
