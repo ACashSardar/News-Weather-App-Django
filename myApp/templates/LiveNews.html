@@ -4,7 +4,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">News And Weather App</a>
+          <a class="navbar-brand" href="#"><i class="fa fa-leaf" aria-hidden="true" style="color:greenyellow"></i> News&Weather.com</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -33,10 +33,10 @@
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="/Weather/"><i class="fa fa-cloud" aria-hidden="true"></i> Weather Forecast</a>
+                <a class="nav-link" href="/Weather/">Weather Forecast</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/Livenews/"><i class="fa fa-fire" aria-hidden="true"></i> Live News</a>
+                <a class="nav-link" href="/Livenews/">Live News</a>
               </li>
             </ul>
 
@@ -48,12 +48,11 @@
         </div>
       </nav>
 
-      <div class="container-fluid">
-        <h4> News Updates From Youtube Live <i class="fa fa-youtube" aria-hidden="true"></i> </h4>
-      </div>
-
       <div class="container-fluid" style="overflow: hidden;">
-        <div class="row">
+        <div class="row p-2">
+            <div class="container-fluid">
+              <h4> News Updates From Youtube Live <i class="fa fa-youtube" aria-hidden="true"></i> </h4>
+            </div>
             <div class="custom-grid">
                 {% for ytc in YTchannels %}
                     <iframe src="{{ytc.url}}"></iframe>

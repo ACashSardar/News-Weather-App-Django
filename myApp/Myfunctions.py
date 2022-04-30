@@ -27,7 +27,6 @@ def DayDate(week):
 def WeatherUpdates(latitude,longitude,week):
     api="https://api.openweathermap.org/data/2.5/onecall?lat="+latitude+"&lon="+longitude+"&exclude=current,minutely,hourly&appid=7f7fb990c0d07404f86fb5f5a6922579"
     JSON_data=requests.get(api).json()
-    #weatherlist is a list of dictionary
     weatherlist=JSON_data['daily']
     day,date=DayDate(week)
     current_day=[]

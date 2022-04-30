@@ -4,7 +4,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">News And Weather App</a>
+          <a class="navbar-brand" href="#"><i class="fa fa-leaf" aria-hidden="true" style="color:greenyellow"></i> News&Weather.com</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -33,10 +33,10 @@
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="/Weather/"><i class="fa fa-cloud" aria-hidden="true"></i> Weather Forecast</a>
+                <a class="nav-link" href="/Weather/">Weather Forecast</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/Livenews/"><i class="fa fa-fire" aria-hidden="true"></i> Live News</a>
+                <a class="nav-link" href="/Livenews/">Live News</a>
               </li>
             </ul>
 
@@ -61,13 +61,13 @@
             {% for current_day,icon,sky_condition,day_temp,temp_max,temp_min,humidity,wind_speed in weather_data %}
                 <div class="col-xl-3 col-6 p-1">
                     <div class="card">
-                        <div class="card-body bg-warning">
-                            <h5 class="card-title">{{current_day}}</h5>
-                            <h2 class="card-title">{{day_temp}}°C</h2>
+                        <div class="card-body text-light" style="background: darkcyan">
+                            <h2 class="card-title">{{current_day}}</h2>
+                            <img src="http://openweathermap.org/img/w/{{icon}}.png" alt="Poster not available">                        
+                            <label class="card-title" style="font-size:large">{{day_temp}}°C</label>
+                            <h5 class="card-text">{{sky_condition.capitalize}}</h5> 
                         </div>
                         <div class="card-body">
-                            <img src="http://openweathermap.org/img/w/{{icon}}.png" alt="Poster not available">
-                            <p class="card-text"><strong>{{sky_condition.capitalize}}</strong></p>                            
                             <p class="card-text"><strong>Max Temp</strong>: {{temp_max}}°C </p>
                             <p class="card-text"><strong>Min Temp</strong>: {{temp_min}}°C </p>
                             <p class="card-text"><strong>Humidity</strong>: {{humidity}}% </p>
@@ -80,6 +80,6 @@
       </div>
     <br>
 
-  {% if city %}
+  {% if address %}
     {% include 'footer.html' %}
   {% endif %}
