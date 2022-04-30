@@ -2,21 +2,17 @@ import requests
 import numpy as np
 import pandas as pd
 from datetime import datetime, date
+from geopy.geocoders import Nominatim
 from newsapi.newsapi_client import NewsApiClient
 
 city="Kolkata"
 country="India"
 week=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
 
-
-
 def GetCityLocation(city):
-    df=pd.read_csv('Cities Database.csv')
-    city_desc=np.array(df['City'])
-    lat=np.array(df['Lat'])
-    lngt=np.array(df['Long'])
-    state_country=np.array(df['State/Country'])   
-    return str(lat[np.where(city_desc==city)][0]),str(lngt[np.where(city_desc==city)][0]),str(state_country[np.where(city_desc==city)][0])
+    loc=Nominatim(user_agent="GetLoc")
+    getLoc=loc.geocode(city)
+    return str(getLoc.latitude),str(getLoc.longitude),str(getLoc.address)
 
 def DayDate(week):
     value=datetime.today().strftime("%A")

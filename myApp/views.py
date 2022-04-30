@@ -36,10 +36,10 @@ def Weather(request):
         city=request.POST['cityname']
         city=city.strip().title()
         try:
-            latitude,longitude,state_country=GetCityLocation(city)
+            latitude,longitude,address=GetCityLocation(city)
             weather_data=WeatherUpdates(latitude,longitude,week)
             _,date=DayDate(week)
-            context={'weather_data':weather_data, 'city':city, 'state_country':state_country, 'date':date}
+            context={'weather_data':weather_data, 'address':address, 'date':date}
         except:
             context={}
         return render(request,'WeatherPage.html', context)
