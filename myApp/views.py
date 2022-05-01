@@ -39,7 +39,7 @@ def Weather(request):
             latitude,longitude,address=GetCityLocation(city)
             weather_data=WeatherUpdates(latitude,longitude,week)
             _,date=DayDate(week)
-            context={'weather_data':weather_data, 'address':address, 'date':date}
+            context={'weather_data':weather_data, 'address':address,'latitude':latitude,'longitude':longitude, 'date':date}
         except:
             context={}
         return render(request,'WeatherPage.html', context)
